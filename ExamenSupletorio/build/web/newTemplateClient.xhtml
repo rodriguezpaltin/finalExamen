@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/supletorio.xhtml">
+
+            <ui:define name="top">
+                Diagrama (Examen Supletorio
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <p:mindmap value="#{mindmapView.root}" style="width: 100%;height: 600px;border: 1px solid black;">
+                        <p:ajax event="select" listener="#{mindmapView.onNodeSelect}" />
+                        <p:ajax event="dblselect" listener="#{mindmapView.onNodeDblselect}" update="output" oncomplete="PF('details').show();" />
+                    </p:mindmap>
+
+                    <p:dialog widgetVar="details" header="Node Details" resizable="false" modal="true" showEffect="fade" hideEffect="fade">
+                        <h:outputText id="output" value="#{minmapView.selectedNode.data}" />
+                    </p:dialog> 
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                <style type="text/css">
+
+                </style>
+                <script type="text/javascript">
+                    //<![CDATA[
+
+                    //]]> 
+                </script>
+
+
+                <h:panelGrid columns="3" cellpadding="8">
+                    <h:outputText value="Focus/Blur: " />
+                    <p:inputText id="focus" title="This tooltip is displayed when input gets the focus" />
+                    <p:tooltip id="toolTipFocus" for="focus" showEvent="focus" hideEvent="blur" />
+
+                    <h:outputText value="Position: " />
+                    <h:outputLink id="fade" value="#">
+                        <h:outputText value="Top" />
+                    </h:outputLink>
+                  
+
+                    <h:outputText value="Track Mouse: " />
+                    <h:outputLink id="track" value="#">
+                        <h:outputText value="Mouse Tracking" />
+                    </h:outputLink>
+                    <p:tooltip id="toolTipTrack" for="track" value="This tooltip tracks mouse position" trackMouse="true" />
+
+                    <h:outputText value="Clip/Explode: " />
+                    <h:outputLink id="grow" value="#">
+                        <h:outputText value="Clip/Explode Effects" />
+                    </h:outputLink>
+            >
+
+                    <h:outputText value="Content: " />
+                    <h:outputLink id="content" value="#">
+                        <h:outputText value="PrimeFaces" />
+                    </h:outputLink>
+                 
+                </h:panelGrid>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
